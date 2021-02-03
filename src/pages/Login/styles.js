@@ -64,14 +64,13 @@ export const StyledTextField = styled(TextField)`
       border-color: #e1e1e1;
       border-radius: 10px;
       width: 336px;
-      height: 40px;
+      height: 45px;
     }
     &:hover fieldset {
       border-color: #e1e1e1;
     }
     &.Mui-focused fieldset {
       margin-top: -2px;
-
       border-color: #e1e1e1;
     }
   }
@@ -88,6 +87,7 @@ export const StyledTextField = styled(TextField)`
 //   /* padding: 0 100px; */
 // `;
 export const StyledButton = styled.button`
+  cursor: pointer;
   background: linear-gradient(45deg, #22e0a1 30%, #22e0a1 90%);
   background-color: black;
   border: 0;
@@ -102,6 +102,7 @@ export const StyledButton = styled.button`
   outline: none;
 `;
 export const forgotPasswordText = styled.div`
+  cursor: pointer;
   width: 436px;
   height: 46px;
   font-family: Poppins;
@@ -121,13 +122,52 @@ export const forgotPasswordText = styled.div`
   }
 `;
 
-export const passwordLink = styled(Link)`
-  /* width: 80px;
-  height: 80px;
-  background: #ffd666;
-  border-radius: 30px;
-
+export const Footer = styled.footer`
+  border-top: 1px solid #e0dde5;
   display: flex;
+  color: #737373;
+  font-size: 15px;
+  margin-top: 300px;
   align-items: center;
-  justify-content: center; */
+  height: 100px;
+  width: 100%;
+  p:nth-of-type(2) {
+    cursor: pointer;
+    margin-left: 20px;
+    color: #cfcece;
+    border-right: 1px solid #cfcece;
+    padding-right: 20px;
+  }
+  p:nth-of-type(3) {
+    cursor: pointer;
+    margin-left: 20px;
+    color: #cfcece;
+    border-right: 1px solid #cfcece;
+    padding-right: 20px;
+  }
+  p:nth-of-type(1) {
+    cursor: pointer;
+    margin-left: 100px;
+    color: black;
+    border-right: 1px solid #cfcece;
+    padding-right: 20px;
+  }
+  p:nth-of-type(4) {
+    margin-left: 1000px;
+    color: black;
+    svg {
+      color: black;
+    }
+  }
+`;
+export const copyrightWrapper = styled.div`
+  border-top: 1px solid #e0dde5;
+  display: flex;
+  color: #737373;
+  font-size: 15px;
+  margin-top: 300px;
+  align-items: center;
+  height: 100px;
+  width: 100%;
+  background-color: white;
 `;
