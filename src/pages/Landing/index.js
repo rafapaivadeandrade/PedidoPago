@@ -10,8 +10,14 @@ import {
 } from './styles';
 import SearchIcon from '@material-ui/icons/Search';
 import { IconButton, Badge } from '@material-ui/core';
+import { Link, useHistory } from 'react-router-dom';
 
 function Landing() {
+  const history = useHistory();
+
+  function handleNewCategoryPage() {
+    history.push('/');
+  }
   return (
     <>
       <Header landing={true}></Header>
@@ -27,7 +33,9 @@ function Landing() {
             </IconButton>
           </InputDiv>
 
-          <NewCategoryButton>criar nova categoria</NewCategoryButton>
+          <NewCategoryButton onClick={handleNewCategoryPage}>
+            criar nova categoria
+          </NewCategoryButton>
         </CategoryActionsContainer>
       </CategoryListContainer>
     </>
