@@ -42,7 +42,7 @@ const theme = createMuiTheme({
     },
   },
 });
-function Header({ landing }) {
+function Header({ landing, newCategory }) {
   if (landing) {
     return (
       <>
@@ -109,6 +109,13 @@ function Header({ landing }) {
           <SubLogoTextLanding secondSubLogo={true}>
             Categorias
           </SubLogoTextLanding>
+          {newCategory ? (
+            <SubLogoTextLanding secondSubLogo={true}>
+              &gt; Nova Categoria
+            </SubLogoTextLanding>
+          ) : (
+            ''
+          )}
         </SubNavLanding>
       </>
     );

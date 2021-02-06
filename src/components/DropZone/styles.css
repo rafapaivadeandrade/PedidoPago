@@ -1,0 +1,54 @@
+.dropzone {
+  height: 200px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: 0;
+}
+
+.dropzone img {
+  width: 180px;
+  height: 180px; 
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.dropzone p {
+  padding-top: 85px;
+  padding-bottom: 85px;
+  padding-right:85px;
+  padding-left: 85px;
+  border: 1px solid #ddd;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropzone p svg {
+  color: #ddd;
+  top: 430px;
+  bottom: 20px;
+  margin-top: 20px;
+  width: 25px;
+  height: 25px;
+}
+.dropzone  svg {
+  position: absolute;
+  color: #ddd;
+  width: 25px;
+  height: 25px;
+  top: 300px;
+  bottom: 20px;
+}

@@ -11,11 +11,12 @@ import {
   StyledTextField,
   StyledButton,
   Footer,
+  ForgotPasswordText,
 } from './styles';
 import { useUser } from '../../hooks/ContextApi';
 
 const Login = () => {
-  const { signIn, isSigned, setIsSigned } = useUser();
+  const { signIn } = useUser();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
@@ -24,12 +25,9 @@ const Login = () => {
     e.preventDefault();
     try {
       signIn({ username: email, password: password });
-      if (isSigned) {
-        history.push('/landing');
-      }
+      history.push('/landing');
     } catch (err) {
       console.log(err);
-      setIsSigned(false);
       alert('Fail to login, try again');
     }
   }
@@ -63,10 +61,10 @@ const Login = () => {
               }}
             />
             <StyledButton type="submit">Continuar</StyledButton>
-            <forgotPasswordText>
+            <ForgotPasswordText>
               <Link to="/">Esqueceu a senha?</Link> Receba link de troca de
               senha no email cadastrado.
-            </forgotPasswordText>
+            </ForgotPasswordText>
           </Form>
         </LoginContainer>
       </Main>

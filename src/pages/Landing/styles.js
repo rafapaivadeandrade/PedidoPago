@@ -1,12 +1,13 @@
-import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
-export const CategoryListContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-  height: 90%;
+export const Container = styled.div`
+  height: 100%;
   background-color: #e5e5e5;
+  display: flex;
+  flex-direction: column;
 `;
+
+export const CategoryListContainer = styled.div``;
 export const CategoryActionsContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -65,3 +66,11 @@ export const NewCategoryButton = styled.button`
     opacity: 0.8;
   }
 `;
+{
+  /* <img
+src="data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7"
+alt="star"
+width="16"
+height="16"
+/> */
+}

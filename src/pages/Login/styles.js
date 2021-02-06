@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { TextField } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 
 export const Main = styled.main`
   background-color: #ffffff;
@@ -75,17 +74,7 @@ export const StyledTextField = styled(TextField)`
     }
   }
 `;
-// export const StyledButton = styled(Button)`
-//   background: linear-gradient(45deg, #22e0a1 30%, #22e0a1 90%);
-//   background-color: black;
-//   border: 0;
-//   border-radius: 10px;
-//   /* box-shadow: 0 3px 5px 2px rgba(255, 105, 135, 0.3); */
-//   color: white;
-//   height: 48;
-//   width: 336px;
-//   /* padding: 0 100px; */
-// `;
+
 export const StyledButton = styled.button`
   cursor: pointer;
   background: linear-gradient(45deg, #22e0a1 30%, #22e0a1 90%);
@@ -101,8 +90,9 @@ export const StyledButton = styled.button`
   margin-bottom: 20px;
   outline: none;
 `;
-export const forgotPasswordText = styled.div`
+export const ForgotPasswordText = styled.div`
   cursor: pointer;
+  padding-right: 70px;
   width: 436px;
   height: 46px;
   font-family: Poppins;
@@ -112,9 +102,6 @@ export const forgotPasswordText = styled.div`
   line-height: 18px;
   letter-spacing: 0.03em;
   color: #424242;
-  margin-left: 50px;
-  text-align: center;
-  align-items: center;
   text-align: center;
   a {
     text-decoration: none;
