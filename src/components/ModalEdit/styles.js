@@ -34,7 +34,7 @@ export const SubNavLanding = styled.div`
     height: 14px;
     width: 14.000000953674316px;
     border-radius: 0px;
-    margin-left: 220px;
+    margin-left: 90px;
     cursor: pointer;
   }
 `;
@@ -45,12 +45,12 @@ export const SubTextLanding = styled.span`
   padding-left: 20px;
   width: 325px;
 `;
-export const RemoveButton = styled.button`
+export const CancelButton = styled.button`
   margin-top: 20px;
   border-radius: 90px;
   margin-right: 20px;
   height: 36px;
-  width: 280px;
+  width: 125px;
   background-color: transparent;
   color: #fff;
   margin-left: 40px;
@@ -65,11 +65,11 @@ export const RemoveButton = styled.button`
     opacity: 0.8;
   }
 `;
-export const KeepButton = styled.button`
+export const SaveButton = styled.button`
   margin-top: 20px;
   border-radius: 90px;
   height: 36px;
-  width: 196px;
+  width: 125px;
   background-color: #22e0a1;
   color: #fff;
   border: 1px solid #22e0a1;
@@ -85,6 +85,8 @@ export const KeepButton = styled.button`
 `;
 export const ButtonsWrapper = styled.div`
   display: flex;
+  margin-left: 90px;
+  margin-top: 40px;
 `;
 export const Text = styled.div`
   cursor: pointer;

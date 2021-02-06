@@ -23,6 +23,10 @@ function NewCategory() {
   const [categoryName, setCategoryName] = useState('');
   const [description, setDescription] = useState('');
   const reader = new FileReader();
+  let nameCountArray = [];
+  let descriptionCountArray = [];
+  let [nameCount, setNameCount] = useState(0);
+  let [descriptionCount, setDescriptionCount] = useState(0);
   async function handleNewCategoryPage() {
     await toBase64(selectFile);
     let today = new Date();
@@ -39,6 +43,21 @@ function NewCategory() {
     } catch (err) {
       console.log(err);
       alert('Fail to create new category, try again');
+    }
+  }
+
+  function changeCountName(value) {
+    setCategoryName(value);
+    nameCountArray = value.split('');
+    for (let i = 0; i < nameCountArray.length; i++) {
+      setNameCount(nameCount + 1);
+    }
+  }
+  function changeCountDescription(value) {
+    setDescription(value);
+    descriptionCountArray = value.split('');
+    for (let i = 0; i < descriptionCountArray.length; i++) {
+      setDescriptionCount(descriptionCount + 1);
     }
   }
   const toBase64 = (file) =>
@@ -67,20 +86,26 @@ function NewCategory() {
               variant="outlined"
               value={categoryName}
               onChange={(e) => {
-                setCategoryName(e.target.value);
+                changeCountName(e.target.value);
               }}
+              inputProps={{ maxLength: 30 }}
             />
-            <FirstCaractersLabel>13 / 20 carateres</FirstCaractersLabel>
+            <FirstCaractersLabel>
+              {nameCount} / 30 caracteres
+            </FirstCaractersLabel>
             <StyledTextField
               style={{ marginTop: '30px' }}
               label="Descrição Curta"
               variant="outlined"
               value={description}
               onChange={(e) => {
-                setDescription(e.target.value);
+                changeCountDescription(e.target.value);
               }}
+              inputProps={{ maxLength: 40 }}
             />
-            <SecondCaractersLabel>11 / 40 caracteres</SecondCaractersLabel>
+            <SecondCaractersLabel>
+              {descriptionCount} / 40 caracteres
+            </SecondCaractersLabel>
             <NewCategoryButton onClick={handleNewCategoryPage}>
               criar categoria
             </NewCategoryButton>

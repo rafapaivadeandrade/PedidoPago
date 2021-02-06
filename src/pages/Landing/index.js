@@ -62,7 +62,13 @@ function Landing() {
             >
               <IconButton onClick={handleEdit}>
                 <Badge>
-                  <VisibilityIcon style={{ fontSize: 30, marginRight: 30 }} />
+                  {category.visible ? (
+                    <VisibilityIcon style={{ fontSize: 30, marginRight: 30 }} />
+                  ) : (
+                    <VisibilityOffIcon
+                      style={{ fontSize: 30, marginRight: 30 }}
+                    />
+                  )}
                 </Badge>
               </IconButton>
               <IconButton>
@@ -157,8 +163,10 @@ function Landing() {
         <ModalEdit
           open={isOpenEdit}
           onClose={() => setIsOpenEdit(false)}
-          categoryName={category.name}
           categoryId={category.id}
+          categoryCreated={category.created_at}
+          // ecommerceStatus={category.ecommerce.status}
+          // callcenterStatus={category.callcenter.status}
         />
         <Table.Body>{renderCategory(category)}</Table.Body>
       </Table>
