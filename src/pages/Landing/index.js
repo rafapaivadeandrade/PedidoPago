@@ -1,12 +1,19 @@
-import React from 'react';
-import { Table, Button, Icon } from 'semantic-ui-react';
+import React, { useEffect, useCallback, useState } from 'react';
+import { Table } from 'semantic-ui-react';
 import Header from '../../components/Header';
+import ModalRemove from '../../components/ModalRemove';
+import ModalEdit from '../../components/ModalEdit';
 import SearchIcon from '@material-ui/icons/Search';
 import { IconButton, Badge } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
+import moment from 'moment';
+import { useUser } from '../../hooks/ContextApi';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import EditIcon from '@material-ui/icons/Edit';
+import ClearIcon from '@material-ui/icons/Clear';
 import {
   Container,
-  CategoryListContainer,
   CategoryActionsContainer,
   CategoryListTitle,
   SearchCategoryInput,
@@ -16,54 +23,64 @@ import {
 
 function Landing() {
   const history = useHistory();
+  const { getCategory, category } = useUser();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenEdit, setIsOpenEdit] = useState(false);
+
+  useEffect(() => {
+    getCategory();
+  }, []);
 
   function handleNewCategoryPage() {
     history.push('/newCategory');
   }
-  function renderRun() {
-    return (
-      <>
-        <Table.Row style={{ backgroundColor: '#e5e5e5' }}>
-          <Table.Cell
-            colspan="3"
-            style={{ paddingLeft: '20px', height: '50px' }}
-          >
-            node_modules
-          </Table.Cell>
-          <Table.Cell style={{ paddingLeft: '20px', height: '50px' }}>
-            Initial commit
-          </Table.Cell>
-          <Table.Cell
-            collapsing
-            textAlign="right"
-            style={{ paddingLeft: '20px', height: '50px' }}
-          >
-            10 hours ago
-            <p>icon</p>
-            <p>icon</p>
-          </Table.Cell>
-        </Table.Row>
-        <Table.Row style={{ backgroundColor: '#FFFFFF' }}>
-          <Table.Cell
-            colspan="3"
-            style={{ paddingLeft: '20px', height: '50px' }}
-          >
-            node_modules
-          </Table.Cell>
-          <Table.Cell style={{ paddingLeft: '20px', height: '50px' }}>
-            Initial commit
-          </Table.Cell>
-          <Table.Cell
-            collapsing
-            textAlign="right"
-            style={{ paddingLeft: '20px', height: '50px' }}
-          >
-            10 hours ago
-          </Table.Cell>
-        </Table.Row>
-      </>
-    );
+  function handleDelete() {
+    setIsOpen(true);
   }
+  function handleEdit() {
+    setIsOpenEdit(true);
+  }
+  const renderCategory = useCallback((category) => {
+    if (category.length === 0) {
+      return null;
+    } else {
+      return (
+        <>
+          <Table.Row style={{ backgroundColor: '#e5e5e5' }}>
+            <Table.Cell style={{ paddingLeft: '20px', height: '50px' }}>
+              {category.name}
+            </Table.Cell>
+            <Table.Cell
+              style={{ paddingLeft: '20px', height: '50px', width: '200px' }}
+            >
+              {moment(category.created_at).format('DD-MM-YYYY')}
+            </Table.Cell>
+            <Table.Cell
+              collapsing
+              textAlign="right"
+              style={{ paddingLeft: '20px', height: '50px', width: '250px' }}
+            >
+              <IconButton onClick={handleEdit}>
+                <Badge>
+                  <VisibilityIcon style={{ fontSize: 30, marginRight: 30 }} />
+                </Badge>
+              </IconButton>
+              <IconButton>
+                <Badge>
+                  <EditIcon style={{ fontSize: 30, marginRight: 30 }} />
+                </Badge>
+              </IconButton>
+              <IconButton>
+                <Badge>
+                  <ClearIcon style={{ fontSize: 30 }} onClick={handleDelete} />
+                </Badge>
+              </IconButton>
+            </Table.Cell>
+          </Table.Row>
+        </>
+      );
+    }
+  }, []);
   return (
     <Container>
       <Header landing={true}></Header>
@@ -105,7 +122,6 @@ function Landing() {
                 paddingLeft: '20px',
                 height: '50px',
               }}
-              colSpan="3"
             >
               Nome da Categoria
             </Table.HeaderCell>
@@ -132,7 +148,19 @@ function Landing() {
             </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
-        <Table.Body>{renderRun()}</Table.Body>
+        <ModalRemove
+          open={isOpen}
+          onClose={() => setIsOpen(false)}
+          categoryName={category.name}
+          categoryId={category.id}
+        />
+        <ModalEdit
+          open={isOpenEdit}
+          onClose={() => setIsOpenEdit(false)}
+          categoryName={category.name}
+          categoryId={category.id}
+        />
+        <Table.Body>{renderCategory(category)}</Table.Body>
       </Table>
     </Container>
   );

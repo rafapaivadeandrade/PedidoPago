@@ -4,6 +4,7 @@ const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState([]);
+  const [category, setCategory] = useState([]);
   // const authAxios = axios.create({
   //   baseURL: apiUrl,
   //   headers: { Authorization: `Bearer ${user.jwt}` },
@@ -84,12 +85,37 @@ export const UserProvider = ({ children }) => {
     }
   }
 
+  async function getCategory() {
+    try {
+      const response = await axios.get(
+        `https://api.sandbox.v2.pedidopago.com.br/v2/store/category/${16}`
+      );
+      setCategory(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  async function deleteCategory(categoryId) {
+    try {
+      await axios.delete(
+        `https://api.sandbox.v2.pedidopago.com.br/v2/store/category/${categoryId}`
+      );
+      setCategory([]);
+      // setCategory(category.filter((category) => category.id !== categoryId));
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <UserContext.Provider
       value={{
         signIn,
         user,
         createCategory,
+        getCategory,
+        category,
+        deleteCategory,
       }}
     >
       {children}

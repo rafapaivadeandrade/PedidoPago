@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Header from '../../components/Header';
-import { Table, Button, Segment, Label } from 'semantic-ui-react';
 import DropZone from '../../components/DropZone';
 import {
   CategoryActionsContainer,
@@ -16,7 +15,6 @@ import {
 } from './styles';
 import { useUser } from '../../hooks/ContextApi';
 import { useHistory } from 'react-router-dom';
-import moment from 'moment';
 
 function NewCategory() {
   const history = useHistory();
@@ -28,7 +26,6 @@ function NewCategory() {
   async function handleNewCategoryPage() {
     await toBase64(selectFile);
     let today = new Date();
-    // const d2 = d.clone().utc().format('YYYY/MM/DD h:mm:ss');
     console.log(today.toLocaleDateString('pt-BR'));
     try {
       createCategory({
@@ -38,7 +35,7 @@ function NewCategory() {
         from: today,
       });
       alert('Category created');
-      // history.push('/landing');
+      history.push('/landing');
     } catch (err) {
       console.log(err);
       alert('Fail to create new category, try again');
