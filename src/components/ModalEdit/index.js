@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import ClearIcon from '@material-ui/icons/Clear';
 import { useUser } from '../../hooks/ContextApi';
+import ClearIcon from '@material-ui/icons/Clear';
 import { makeStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
-import moment from 'moment';
-
 import {
   ModalStyles,
   OverlayStyles,
@@ -19,6 +16,7 @@ import {
   SaveButton,
   ButtonsWrapper,
 } from './styles';
+
 const useStyles = makeStyles((theme) => ({
   margin: {
     marginLeft: theme.spacing(3),
@@ -31,13 +29,34 @@ function ModalEdit({
   categoryCreated,
   ecommerceStatus,
   callcenterStatus,
+  categoryId,
+  name,
+  description,
+  new_logo_image,
+  visible,
 }) {
+  const { editCategory, category } = useUser();
   const classes = useStyles();
-  const [ecommerceVisible, setEcommerceVisible] = useState(ecommerceStatus);
-  const [callcenterIsVisible, setCallCenterVisible] = useState(
-    callcenterStatus
-  );
-  const {} = useUser();
+  const [ecommerceVisible, setEcommerceVisible] = useState(false);
+  const [callcenterIsVisible, setCallCenterVisible] = useState(false);
+  const [ecommerceDate, setEcommerceDate] = useState();
+  const [callcenterDate, setCallCenterDate] = useState();
+
+  function handlerEditCategory() {
+    console.log('edit');
+    editCategory(
+      categoryId,
+      ecommerceVisible,
+      callcenterIsVisible,
+      ecommerceDate,
+      callcenterDate,
+      name,
+      description,
+      new_logo_image,
+      visible
+    );
+    onClose();
+  }
 
   function handleEcommerceVisible() {
     setEcommerceVisible(!ecommerceVisible);
@@ -66,16 +85,16 @@ function ModalEdit({
           </EcommerceLabel>
         </EcommerceDiv>
         <SelectInput
-          select
           label="Data"
+          type="date"
+          defaultValue={categoryCreated}
+          InputLabelProps={{
+            shrink: true,
+          }}
           variant="outlined"
           className={classes.margin}
-        >
-          {' '}
-          <MenuItem>{moment(categoryCreated).format('DD-MM-YYYY')}</MenuItem>
-          <MenuItem>{moment(categoryCreated).format('DD-MM-YYYY')}</MenuItem>
-          <MenuItem>{moment(categoryCreated).format('DD-MM-YYYY')}</MenuItem>
-        </SelectInput>
+          onChange={(date) => setEcommerceDate(date)}
+        ></SelectInput>
         <EcommerceDiv>
           <CheckBoxInput
             color="primary"
@@ -87,19 +106,19 @@ function ModalEdit({
           </EcommerceLabel>
         </EcommerceDiv>
         <SelectInput
-          select
           label="Data"
+          type="date"
+          defaultValue={categoryCreated}
+          InputLabelProps={{
+            shrink: true,
+          }}
           variant="outlined"
           className={classes.margin}
-        >
-          {' '}
-          <MenuItem>
-            <em>None</em>
-          </MenuItem>
-        </SelectInput>
+          onChange={(date) => setCallCenterDate(date)}
+        ></SelectInput>
         <ButtonsWrapper>
           <CancelButton onClick={onClose}>cancelar</CancelButton>
-          <SaveButton>salvar</SaveButton>
+          <SaveButton onClick={handlerEditCategory}>salvar</SaveButton>
         </ButtonsWrapper>
       </ModalStyles>
     </>,

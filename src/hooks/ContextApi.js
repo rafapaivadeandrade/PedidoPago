@@ -26,15 +26,6 @@ export const UserProvider = ({ children }) => {
   }
   async function createCategory({ logo, name, description, from }) {
     try {
-      // await axios.interceptors.request.use(
-      //   (config) => {
-      //     config.headers.authorization = `Bearer ${user.jwt}`;
-      //     return config;
-      //   },
-      //   (error) => {
-      //     return Promise.reject(error);
-      //   }
-      // );
       await axios.post(
         'https://api.sandbox.v2.pedidopago.com.br/v2/store/category',
         {
@@ -88,9 +79,50 @@ export const UserProvider = ({ children }) => {
   async function getCategory() {
     try {
       const response = await axios.get(
-        `https://api.sandbox.v2.pedidopago.com.br/v2/store/category/${16}`
+        `https://api.sandbox.v2.pedidopago.com.br/v2/store/category/${2}`
       );
       setCategory(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  async function editCategory(
+    categoryId,
+    ecommerceVisible,
+    callcenterIsVisible,
+    ecommerceDate,
+    callcenterDate,
+    new_logo_image,
+    name,
+    description,
+    visible
+  ) {
+    try {
+      await axios.put(
+        `https://api.sandbox.v2.pedidopago.com.br/v2/store/category/${categoryId}`,
+        {
+          add_products: ['string'],
+          callcenter: {
+            from: callcenterDate,
+            status: callcenterIsVisible,
+          },
+          delete_logo: true,
+          delete_products: ['string'],
+          description,
+          ecommerce: {
+            from: ecommerceDate,
+            status: ecommerceVisible,
+          },
+          keywords: ['string'],
+          keywords_concat: 'string',
+          name,
+          new_logo_content_type: 'string',
+          new_logo_image,
+          position: 0,
+          replace_products: ['string'],
+          visible,
+        }
+      );
     } catch (err) {
       console.log(err);
     }
@@ -115,6 +147,7 @@ export const UserProvider = ({ children }) => {
         createCategory,
         getCategory,
         category,
+        editCategory,
         deleteCategory,
       }}
     >

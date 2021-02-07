@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table } from 'semantic-ui-react';
 import Header from '../../components/Header';
 import ModalRemove from '../../components/ModalRemove';
@@ -19,6 +19,7 @@ import {
   SearchCategoryInput,
   InputDiv,
   NewCategoryButton,
+  ImageLogo,
 } from './styles';
 
 function Landing() {
@@ -26,6 +27,7 @@ function Landing() {
   const { getCategory, category } = useUser();
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
+  const [isEyeVisible, setEyeVisible] = useState(!category.visible);
 
   useEffect(() => {
     getCategory();
@@ -40,14 +42,21 @@ function Landing() {
   function handleEdit() {
     setIsOpenEdit(true);
   }
-  const renderCategory = useCallback((category) => {
+  const renderCategory = (category) => {
+    console.log(category.visible);
     if (category.length === 0) {
       return null;
     } else {
       return (
         <>
           <Table.Row style={{ backgroundColor: '#e5e5e5' }}>
-            <Table.Cell style={{ paddingLeft: '20px', height: '50px' }}>
+            <Table.Cell
+              style={{
+                paddingLeft: '20px',
+                height: '50px',
+              }}
+            >
+              <ImageLogo src={category.logo} />
               {category.name}
             </Table.Cell>
             <Table.Cell
@@ -60,9 +69,9 @@ function Landing() {
               textAlign="right"
               style={{ paddingLeft: '20px', height: '50px', width: '250px' }}
             >
-              <IconButton onClick={handleEdit}>
+              <IconButton onClick={() => setEyeVisible(!isEyeVisible)}>
                 <Badge>
-                  {category.visible ? (
+                  {isEyeVisible ? (
                     <VisibilityIcon style={{ fontSize: 30, marginRight: 30 }} />
                   ) : (
                     <VisibilityOffIcon
@@ -71,7 +80,7 @@ function Landing() {
                   )}
                 </Badge>
               </IconButton>
-              <IconButton>
+              <IconButton onClick={handleEdit}>
                 <Badge>
                   <EditIcon style={{ fontSize: 30, marginRight: 30 }} />
                 </Badge>
@@ -86,7 +95,7 @@ function Landing() {
         </>
       );
     }
-  }, []);
+  };
   return (
     <Container>
       <Header landing={true}></Header>
@@ -164,9 +173,11 @@ function Landing() {
           open={isOpenEdit}
           onClose={() => setIsOpenEdit(false)}
           categoryId={category.id}
-          categoryCreated={category.created_at}
-          // ecommerceStatus={category.ecommerce.status}
-          // callcenterStatus={category.callcenter.status}
+          categoryCreated={moment(category.created_at).format('YYYY-MM-DD')}
+          name={category.name}
+          description={category.description}
+          new_logo_image={category.logo}
+          visible={isEyeVisible}
         />
         <Table.Body>{renderCategory(category)}</Table.Body>
       </Table>

@@ -22,10 +22,8 @@ export const CategoryListTitle = styled.div`
   color: #a3a3a3;
 `;
 export const SearchCategoryInput = styled.input`
-  /* margin-top: 50px; */
   background-color: transparent;
   border: 0px solid #a3a3a3;
-  /* box-sizing: border-box; */
   border-radius: 90px;
   outline: none;
   height: 60px;
@@ -66,11 +64,11 @@ export const NewCategoryButton = styled.button`
     opacity: 0.8;
   }
 `;
-{
-  /* <img
-src="data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7"
-alt="star"
-width="16"
-height="16"
-/> */
-}
+export const ImageLogo = styled.img`
+  height: 32px;
+  width: 32px;
+  left: 8px;
+  top: 8px;
+  border-radius: 0px;
+  margin-right: 20px;
+`;
