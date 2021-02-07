@@ -14,11 +14,11 @@ import {
   NewCategoryButton,
 } from './styles';
 import { useUser } from '../../hooks/ContextApi';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
 function NewCategory() {
   const history = useHistory();
-  const { createCategory } = useUser();
+  const { createCategory, user } = useUser();
   const [selectFile, setSelectFile] = useState();
   const [categoryName, setCategoryName] = useState('');
   const [description, setDescription] = useState('');
@@ -68,6 +68,10 @@ function NewCategory() {
       };
       reader.onerror = (error) => reject(error);
     });
+
+  if (user.length === 0) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <>

@@ -5,7 +5,7 @@ import ModalRemove from '../../components/ModalRemove';
 import ModalEdit from '../../components/ModalEdit';
 import SearchIcon from '@material-ui/icons/Search';
 import { IconButton, Badge } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import moment from 'moment';
 import { useUser } from '../../hooks/ContextApi';
 import VisibilityIcon from '@material-ui/icons/Visibility';
@@ -24,7 +24,7 @@ import {
 
 function Landing() {
   const history = useHistory();
-  const { getCategory, category } = useUser();
+  const { getCategory, category, user } = useUser();
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [isEyeVisible, setEyeVisible] = useState(!category.visible);
@@ -43,7 +43,9 @@ function Landing() {
     setIsOpenEdit(true);
   }
   const renderCategory = (category) => {
-    console.log(category.visible);
+    if (user.length === 0) {
+      return <Redirect to="/" />;
+    }
     if (category.length === 0) {
       return null;
     } else {
