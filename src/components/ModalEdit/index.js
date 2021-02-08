@@ -34,8 +34,10 @@ function ModalEdit({
   description,
   new_logo_image,
   visible,
+  ecommercedate,
+  callcenterdate,
 }) {
-  const { editCategory, category } = useUser();
+  const { editCategory } = useUser();
   const classes = useStyles();
   const [ecommerceVisible, setEcommerceVisible] = useState(false);
   const [callcenterIsVisible, setCallCenterVisible] = useState(false);
@@ -48,8 +50,8 @@ function ModalEdit({
       categoryId,
       ecommerceVisible,
       callcenterIsVisible,
-      ecommerceDate,
-      callcenterDate,
+      ecommerceDate.timeStamp,
+      callcenterDate.timeStamp,
       name,
       description,
       new_logo_image,
@@ -68,7 +70,7 @@ function ModalEdit({
   if (!open) return null;
   return ReactDOM.createPortal(
     <>
-      <OverlayStyles onClick={console.log('clicked')} />
+      <OverlayStyles />
       <ModalStyles>
         <SubNavLanding>
           <SubTextLanding>Alternar visibilidade</SubTextLanding>
@@ -126,4 +128,4 @@ function ModalEdit({
   );
 }
 
-export default ModalEdit;
+export default React.memo(ModalEdit);

@@ -22,7 +22,7 @@ function ModalRemove({ open, onClose, categoryName, categoryId }) {
   if (!open) return null;
   return ReactDOM.createPortal(
     <>
-      <OverlayStyles onClick={console.log('clicked')} />
+      <OverlayStyles />
       <ModalStyles>
         <SubNavLanding>
           <SubTextLanding>Remover Categoria</SubTextLanding>

@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useCallback } from 'react';
 import axios from 'axios';
 const UserContext = createContext({});
 
@@ -76,16 +76,16 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  async function getCategory() {
+  const getCategory = useCallback(async () => {
     try {
       const response = await axios.get(
-        `https://api.sandbox.v2.pedidopago.com.br/v2/store/category/${2}`
+        `https://api.sandbox.v2.pedidopago.com.br/v2/store/category/${40}`
       );
       setCategory(response.data);
     } catch (err) {
       console.log(err);
     }
-  }
+  });
   async function editCategory(
     categoryId,
     ecommerceVisible,

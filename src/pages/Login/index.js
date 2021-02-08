@@ -74,7 +74,7 @@ const Login = () => {
         <p>Política de Privacidade</p>
         <p>
           Feito com{' '}
-          <FaHeart color="#22e0a1" size={20} margin="10px" marginTop="10px" />{' '}
+          <FaHeart color="#22e0a1" size={20} margin="10px" margin-top="10px" />{' '}
           em SP
         </p>
       </Footer>

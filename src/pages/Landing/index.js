@@ -31,6 +31,7 @@ function Landing() {
 
   useEffect(() => {
     getCategory();
+    console.log(category.ecommerce);
   }, []);
 
   function handleNewCategoryPage() {
@@ -43,12 +44,12 @@ function Landing() {
     setIsOpenEdit(true);
   }
   const renderCategory = (category) => {
-    if (user.length === 0) {
-      return <Redirect to="/" />;
-    }
     if (category.length === 0) {
       return null;
     } else {
+      if (user.length === 0) {
+        return <Redirect to="/" />;
+      }
       return (
         <>
           <Table.Row style={{ backgroundColor: '#e5e5e5' }}>
@@ -180,6 +181,8 @@ function Landing() {
           description={category.description}
           new_logo_image={category.logo}
           visible={isEyeVisible}
+          // ecommercedate={category.ecommerce['from']}
+          // callcenterdate={category.callcenter['from']}
         />
         <Table.Body>{renderCategory(category)}</Table.Body>
       </Table>
